@@ -1,0 +1,79 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-11-20 13:14+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Martin Fors\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: sv_SE\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: esc_html__;esc_html_e;esc_attr__;esc_attr_e;__;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../include/classes.php:9
+msgid "Show archive for a chosen post type and/or category"
+msgstr "Visa arkiv för vald posttyp och/eller kategori"
+
+#: ../include/classes.php:22
+msgid "Post Type Archive"
+msgstr "Arkiv för posttyper"
+
+#: ../include/classes.php:28
+#: ../include/classes.php:232
+msgid "All"
+msgstr "Alla"
+
+#: ../include/classes.php:89
+#: ../include/functions.php:33
+msgid "Choose year here"
+msgstr "Välj år här"
+
+#: ../include/classes.php:123
+msgid "Ascending"
+msgstr "Stigande"
+
+#: ../include/classes.php:124
+msgid "Descending"
+msgstr "Fallande"
+
+#: ../include/classes.php:299
+msgid "Title"
+msgstr "Rubrik"
+
+#: ../include/classes.php:300
+msgid "Replace Page Title"
+msgstr "Ersätt titel på sida"
+
+#: ../include/classes.php:301
+msgid "Post Type"
+msgstr "Posttyp"
+
+#: ../include/classes.php:305
+msgid "Categories"
+msgstr "Kategorier"
+
+#: ../include/classes.php:309
+msgid "Always Show Years"
+msgstr "Visa alltid år"
+
+#: ../include/classes.php:310
+msgid "Show 'All'"
+msgstr "Visa 'Alla'"
+
+#: ../include/classes.php:311
+msgid "Year Order"
+msgstr "Ordning på årtal"
+
+#: ../include/functions.php:16
+msgid "Replace text"
+msgstr "Ersätt text"
+
+#: ../include/functions.php:25
+msgid "Archive"
+msgstr "Arkiv"
+

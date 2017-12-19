@@ -1,0 +1,27 @@
+@media all
+{
+	h1.archive_title
+	{
+		line-height: 1.5;
+	}
+
+	.widget_post_type_archive li.is_parent
+	{
+		text-indent: .6em;
+	}
+
+	.widget_post_type_archive li.is_child
+	{
+		text-indent: 1.2em;
+	}
+
+		.widget_post_type_archive li a
+		{
+			display: block;
+		}
+
+			#sidebar .widget_post_type_archive li.active a, .aside .widget_post_type_archive li.active a
+			{
+				color: #0070b3;
+			}
+}
