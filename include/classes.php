@@ -85,8 +85,9 @@ class widget_archive extends WP_Widget
 	{
 		global $wpdb;
 
-		$arr_data = array();
-		$arr_data[''] = "-- ".get_option_or_default('setting_archive_choose_here_text', __("Choose year here", 'lang_archive'))." --";
+		$arr_data = array(
+			'' => "-- ".get_option_or_default('setting_archive_choose_here_text', __("Choose year here", 'lang_archive'))." --"
+		);
 
 		$result = $wpdb->get_results($wpdb->prepare("SELECT SUBSTRING(post_date, 1, 4) AS post_year FROM ".$wpdb->posts." INNER JOIN ".$wpdb->term_relationships." ON ".$wpdb->posts.".ID = ".$wpdb->term_relationships.".object_id INNER JOIN ".$wpdb->term_taxonomy ." USING (term_taxonomy_id) WHERE post_type = %s AND post_status = 'publish'".$this->query_where." GROUP BY post_year ORDER BY post_year ".$this->instance['year_order'], $this->instance['post_type'])); //, COUNT(ID) AS year_amount
 
@@ -154,7 +155,7 @@ class widget_archive extends WP_Widget
 		{
 			if($category->parent > 0)
 			{
-				$result = $wpdb->get_results($wpdb->prepare("SELECT ID FROM ".$wpdb->posts." INNER JOIN ".$wpdb->term_relationships." ON ".$wpdb->posts.".ID = ".$wpdb->term_relationships.".object_id INNER JOIN ".$wpdb->term_taxonomy ." USING (term_taxonomy_id) WHERE post_type = %s AND post_status = 'publish' AND post_date LIKE %s AND term_id = '%d'".$this->query_where, $this->instance['post_type'], $this->year."%", $category->cat_ID));
+				$result = $wpdb->get_results($wpdb->prepare("SELECT ID FROM ".$wpdb->posts." INNER JOIN ".$wpdb->term_relationships." ON ".$wpdb->posts.".ID = ".$wpdb->term_relationships.".object_id INNER JOIN ".$wpdb->term_taxonomy." USING (term_taxonomy_id) WHERE post_type = %s AND post_status = 'publish' AND post_date LIKE %s AND term_id = '%d'".$this->query_where, $this->instance['post_type'], $this->year."%", $category->cat_ID));
 
 				$count_temp = $wpdb->num_rows;
 
