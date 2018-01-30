@@ -3,13 +3,14 @@
 Plugin Name: MF Archive
 Plugin URI: 
 Description: 
-Version: 2.3.3
+Version: 2.3.5
 Licence: GPLv2 or later
 Author: Martin Fors
 Author URI: http://frostkom.se
 Text Domain: lang_archive
 Domain Path: /lang
 
+Depends: MF Base
 GitHub Plugin URI: 
 */
 

@@ -64,7 +64,17 @@ class widget_archive extends WP_Widget
 
 		$this->display = false;
 
-		if(count($this->instance['categories']) > 0)
+		if(strpos(get_page_template(), 'template_posts.php') !== false)
+		{
+			$this->display = true;
+		}
+
+		else if(isset($post->post_type) && $post->post_type == $this->instance['post_type'])
+		{
+			$this->display = true;
+		}
+		
+		else if(count($this->instance['categories']) > 0)
 		{
 			foreach($this->arr_cat as $category)
 			{
@@ -73,11 +83,6 @@ class widget_archive extends WP_Widget
 					$this->display = true;
 				}
 			}
-		}
-
-		else if(isset($post->post_type) && $post->post_type == $this->instance['post_type'])
-		{
-			$this->display = true;
 		}
 	}
 
@@ -133,8 +138,6 @@ class widget_archive extends WP_Widget
 		$this->arr_categories = array();
 
 		$arr_categories = get_categories(array('hierarchical' => 1, 'hide_empty' => 1, 'include' => implode(",", $this->instance['categories']))); //, 'orderby' => 'name', 'order' => 'ASC'
-
-		//echo var_export($arr_categories, true);
 
 		foreach($arr_categories as $category)
 		{

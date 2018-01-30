@@ -10,18 +10,24 @@
 		text-indent: .6em;
 	}
 
-	.widget_post_type_archive li.is_child
+	.widget_post_type_archive ul
 	{
-		text-indent: 1.2em;
+
 	}
 
-		.widget_post_type_archive li a
+		.widget_post_type_archive li.is_child
 		{
-			display: block;
+			text-indent: 1.2em;
 		}
 
-			#sidebar .widget_post_type_archive li.active a, .aside .widget_post_type_archive li.active a
+			.widget_post_type_archive li a
 			{
-				color: #0070b3;
+				display: inline-block;
+				text-indent: 0;
 			}
+
+				#sidebar .widget_post_type_archive li.active a, .aside .widget_post_type_archive li.active a
+				{
+					color: #0070b3;
+				}
 }
