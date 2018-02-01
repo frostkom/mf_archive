@@ -194,7 +194,7 @@ class widget_archive extends WP_Widget
 
 					$arr_data_years = $this->get_post_years();
 
-					if($instance['always_show_years'] == 'yes' || count($arr_data_years) > 1)
+					if($instance['always_show_years'] == 'yes' || count($arr_data_years) > 2)
 					{
 						echo "<form action='".get_site_url()."' method='get' class='mf_form'>"
 							.show_select(array('data' => $arr_data_years, 'name' => 'year', 'value' => $this->year, 'xtra' => " rel='submit_change' disabled"))
