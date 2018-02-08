@@ -1,7 +1,6 @@
-function on_load_archive()
+jQuery(function($)
 {
-	/* Adjust Page Title */
-	var dom_obj = jQuery('#replace_page_title');
+	var dom_obj = $('#replace_page_title');
 
 	if(dom_obj.length > 0)
 	{
@@ -11,30 +10,20 @@ function on_load_archive()
 		{
 			var i = 0;
 
-			jQuery('body.archive h1').each(function()
+			$('body.archive h1').each(function()
 			{
 				if(i == 0)
 				{
-					jQuery(this).text(dom_val).addClass('archive_title');
+					$(this).text(dom_val).addClass('archive_title');
 				}
 
 				else
 				{
-					jQuery(this).remove();
+					$(this).remove();
 				}
 
 				i++;
 			});
 		}
-	}
-}
-
-jQuery(function($)
-{
-	on_load_archive();
-
-	if(typeof collect_on_load == 'function')
-	{
-		collect_on_load('on_load_archive');
 	}
 });
