@@ -21,11 +21,14 @@ class widget_archive extends WP_Widget
 
 		parent::__construct('post_type_archives', __("Post Type Archive", 'lang_archive'), $widget_ops);
 
-		$plugin_include_url = plugin_dir_url(__FILE__);
-		$plugin_version = get_plugin_version(__FILE__);
+		if(!is_admin())
+		{
+			$plugin_include_url = plugin_dir_url(__FILE__);
+			$plugin_version = get_plugin_version(__FILE__);
 
-		mf_enqueue_style('style_archive', $plugin_include_url."style.css", $plugin_version);
-		mf_enqueue_script('script_archive', $plugin_include_url."script.js", $plugin_version);
+			mf_enqueue_style('style_archive', $plugin_include_url."style.css", $plugin_version);
+			mf_enqueue_script('script_archive', $plugin_include_url."script.js", $plugin_version);
+		}
 	}
 
 	function fetch_request()
@@ -73,7 +76,7 @@ class widget_archive extends WP_Widget
 		{
 			$this->display = true;
 		}
-		
+
 		else if(count($this->instance['categories']) > 0)
 		{
 			foreach($this->arr_cat as $category)
