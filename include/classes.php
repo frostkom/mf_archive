@@ -1,5 +1,22 @@
 <?php
 
+class mf_archive
+{
+	function __construct()
+	{
+
+	}
+
+	function wp_head()
+	{
+		$plugin_include_url = plugin_dir_url(__FILE__);
+		$plugin_version = get_plugin_version(__FILE__);
+
+		mf_enqueue_style('style_archive', $plugin_include_url."style.css", $plugin_version);
+		mf_enqueue_script('script_archive', $plugin_include_url."script.js", $plugin_version);
+	}
+}
+
 class widget_archive extends WP_Widget
 {
 	public function __construct()
@@ -20,15 +37,6 @@ class widget_archive extends WP_Widget
 		);
 
 		parent::__construct('post_type_archives', __("Post Type Archive", 'lang_archive'), $widget_ops);
-
-		if(!is_admin())
-		{
-			$plugin_include_url = plugin_dir_url(__FILE__);
-			$plugin_version = get_plugin_version(__FILE__);
-
-			mf_enqueue_style('style_archive', $plugin_include_url."style.css", $plugin_version);
-			mf_enqueue_script('script_archive', $plugin_include_url."script.js", $plugin_version);
-		}
 	}
 
 	function fetch_request()
