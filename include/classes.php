@@ -7,6 +7,53 @@ class mf_archive
 
 	}
 
+	function widgets_init()
+	{
+		register_widget('widget_archive');
+	}
+
+	function settings_archive()
+	{
+		$options_area = __FUNCTION__;
+
+		add_settings_section($options_area, "", array($this, $options_area."_callback"), BASE_OPTIONS_PAGE);
+
+		$arr_settings = array();
+		$arr_settings['setting_archive_choose_here_text'] = __("Replace text", 'lang_archive');
+
+		show_settings_fields(array('area' => $options_area, 'object' => $this, 'settings' => $arr_settings));
+	}
+
+	function settings_archive_callback()
+	{
+		$setting_key = get_setting_key(__FUNCTION__);
+
+		echo settings_header($setting_key, __("Archive", 'lang_archive'));
+	}
+
+	function setting_archive_choose_here_text_callback()
+	{
+		$setting_key = get_setting_key(__FUNCTION__);
+		$option = get_option($setting_key);
+
+		echo show_textfield(array('name' => $setting_key, 'value' => $option, 'placeholder' => __("Choose year here", 'lang_archive')));
+	}
+
+	/*function get_the_archive_title($title)
+	{
+		if(is_category())
+		{
+			$title = "Category"; //single_cat_title('Test - ', false);
+		}
+
+		if(is_year())
+		{
+			$title = "Year";
+		}
+
+		return $title." 2";
+	}*/
+
 	function wp_head()
 	{
 		$plugin_include_url = plugin_dir_url(__FILE__);
@@ -203,78 +250,81 @@ class widget_archive extends WP_Widget
 						.$args['after_title'];
 					}
 
-					$arr_data_years = $this->get_post_years();
+					echo "<div class='section'>";
 
-					if($instance['always_show_years'] == 'yes' || count($arr_data_years) > 2)
-					{
-						echo "<form action='".get_site_url()."' method='get' class='mf_form'>"
-							.show_select(array('data' => $arr_data_years, 'name' => 'year', 'value' => $this->year, 'xtra' => " rel='submit_change' disabled"))
-							.input_hidden(array('name' => 'cat', 'value' => $this->cat))
-						."</form>";
-					}
+						$arr_data_years = $this->get_post_years();
 
-					if($instance['post_type'] == 'post')
-					{
-						$this->get_categories();
-
-						if(count($this->arr_categories) > 1 || count($this->instance['categories']) > 1)
+						if($instance['always_show_years'] == 'yes' || count($arr_data_years) > 2)
 						{
-							$site_url = get_site_url();
+							echo "<form action='".get_site_url()."' method='get' class='mf_form'>"
+								.show_select(array('data' => $arr_data_years, 'name' => 'year', 'value' => $this->year, 'xtra' => " rel='submit_change' disabled"))
+								.input_hidden(array('name' => 'cat', 'value' => $this->cat))
+							."</form>";
+						}
 
-							$url_base = $site_url."?year=".$this->year."&cat=";
+						if($instance['post_type'] == 'post')
+						{
+							$this->get_categories();
 
-							$out_temp = "";
-
-							foreach($this->arr_categories as $key => $arr_category)
+							if(count($this->arr_categories) > 1 || count($this->instance['categories']) > 1)
 							{
-								$out_temp .= "<li class='is_parent".(in_array($key, $this->arr_cat) ? " active" : "")."'>
-									<a href='".$url_base.$key."'>".$arr_category['name']." (".$arr_category['count'].")</a>
-								</li>";
+								$site_url = get_site_url();
 
-								foreach($this->arr_categories[$key]['children'] as $key => $arr_category)
+								$url_base = $site_url."?year=".$this->year."&cat=";
+
+								$out_temp = "";
+
+								foreach($this->arr_categories as $key => $arr_category)
 								{
-									$out_temp .= "<li class='is_child".(in_array($key, $this->arr_cat) ? " active" : "")."'>
+									$out_temp .= "<li class='is_parent".(in_array($key, $this->arr_cat) ? " active" : "")."'>
 										<a href='".$url_base.$key."'>".$arr_category['name']." (".$arr_category['count'].")</a>
 									</li>";
+
+									foreach($this->arr_categories[$key]['children'] as $key => $arr_category)
+									{
+										$out_temp .= "<li class='is_child".(in_array($key, $this->arr_cat) ? " active" : "")."'>
+											<a href='".$url_base.$key."'>".$arr_category['name']." (".$arr_category['count'].")</a>
+										</li>";
+									}
 								}
+
+								echo "<ul>";
+
+									if($instance['show_all'] == 'yes')
+									{
+										echo "<li class='is_all".($this->cat_all == $this->cat && strlen($this->cat_all) == strlen($this->cat) ? " active" : "")."'>
+											<a href='".$url_base.$this->cat_all."'>".__("All", 'lang_archive')."</a>
+										</li>";
+									}
+
+									echo $out_temp
+								."</ul>";
 							}
-
-							echo "<ul>";
-
-								if($instance['show_all'] == 'yes')
-								{
-									echo "<li class='is_all".($this->cat_all == $this->cat && strlen($this->cat_all) == strlen($this->cat) ? " active" : "")."'>
-										<a href='".$url_base.$this->cat_all."'>".__("All", 'lang_archive')."</a>
-									</li>";
-								}
-
-								echo $out_temp
-							."</ul>";
 						}
-					}
 
-					if($instance['replace_page_title'] != '')
-					{
-						$str_categories = "";
-
-						if($this->cat != '')
+						if($instance['replace_page_title'] != '')
 						{
-							foreach($this->arr_cat as $category)
+							$str_categories = "";
+
+							if($this->cat != '')
 							{
-								if($category > 0)
+								foreach($this->arr_cat as $category)
 								{
-									$str_categories .= ($str_categories != '' ? ", " : "").get_category($category)->name;
+									if($category > 0)
+									{
+										$str_categories .= ($str_categories != '' ? ", " : "").get_category($category)->name;
+									}
 								}
 							}
+
+							$instance['replace_page_title'] = str_replace("[category]", $str_categories, $instance['replace_page_title']);
+							$instance['replace_page_title'] = str_replace("[year]", ($this->year > 0 ? $this->year : __("All", 'lang_archive')), $instance['replace_page_title']);
+
+							echo input_hidden(array('name' => 'replace_page_title', 'value' => $instance['replace_page_title'], 'xtra' => "id='replace_page_title'"));
 						}
 
-						$instance['replace_page_title'] = str_replace("[category]", $str_categories, $instance['replace_page_title']);
-						$instance['replace_page_title'] = str_replace("[year]", ($this->year > 0 ? $this->year : __("All", 'lang_archive')), $instance['replace_page_title']);
-
-						echo input_hidden(array('name' => 'replace_page_title', 'value' => $instance['replace_page_title'], 'xtra' => "id='replace_page_title'"));
-					}
-
-				echo $args['after_widget'];
+					echo "</div>"
+				.$args['after_widget'];
 			}
 		}
 	}
