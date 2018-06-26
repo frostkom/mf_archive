@@ -3,7 +3,7 @@
 Plugin Name: MF Archive
 Plugin URI: https://github.com/frostkom/mf_archive
 Description: 
-Version: 2.4.0
+Version: 2.4.1
 Licence: GPLv2 or later
 Author: Martin Fors
 Author URI: http://frostkom.se
@@ -18,8 +18,6 @@ include_once("include/classes.php");
 
 $obj_archive = new mf_archive();
 
-add_action('widgets_init', array($obj_archive, 'widgets_init'));
-
 if(is_admin())
 {
 	add_action('admin_init', array($obj_archive, 'settings_archive'));
@@ -33,5 +31,7 @@ else
 	//add_filter('wp_list_pages_excludes', '');
 	//add_filter('wp_list_pages', '');
 }
+
+add_action('widgets_init', array($obj_archive, 'widgets_init'));
 
 load_plugin_textdomain('lang_archive', false, dirname(plugin_basename(__FILE__)).'/lang/');
