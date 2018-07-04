@@ -162,7 +162,7 @@ class widget_archive extends WP_Widget
 		return $arr_data;
 	}
 
-	function get_categories_for_select($data = array())
+	/*function get_categories_for_select($data = array())
 	{
 		if(!isset($data['hierarchical'])){		$data['hierarchical'] = true;}
 
@@ -179,7 +179,7 @@ class widget_archive extends WP_Widget
 		}
 
 		return $arr_data;
-	}
+	}*/
 
 	function get_order_for_select()
 	{
@@ -367,7 +367,7 @@ class widget_archive extends WP_Widget
 
 			if($instance['post_type'] == 'post')
 			{
-				echo show_select(array('data' => $this->get_categories_for_select(), 'name' => $this->get_field_name('categories')."[]", 'text' => __("Categories", 'lang_archive'), 'value' => $instance['categories']));
+				echo show_select(array('data' => get_categories_for_select(), 'name' => $this->get_field_name('categories')."[]", 'text' => __("Categories", 'lang_archive'), 'value' => $instance['categories']));
 			}
 
 			echo "<div class='flex_flow'>"
