@@ -361,7 +361,7 @@ class widget_archive extends WP_Widget
 		}
 
 		echo "<div class='mf_form'>"
-			.show_textfield(array('name' => $this->get_field_name('title'), 'text' => __("Title", 'lang_archive'), 'value' => $instance['title']))
+			.show_textfield(array('name' => $this->get_field_name('title'), 'text' => __("Title", 'lang_archive'), 'value' => $instance['title'], 'xtra' => " id='archive-title'"))
 			.show_textfield(array('name' => $this->get_field_name('replace_page_title'), 'text' => __("Replace Page Title", 'lang_archive'), 'value' => $instance['replace_page_title'], 'placeholder' => "[category] [year]"))
 			.show_select(array('data' => $arr_data_post_types, 'name' => $this->get_field_name('post_type'), 'text' => __("Post Type", 'lang_archive'), 'value' => $instance['post_type']));
 
