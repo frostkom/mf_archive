@@ -162,25 +162,6 @@ class widget_archive extends WP_Widget
 		return $arr_data;
 	}
 
-	/*function get_categories_for_select($data = array())
-	{
-		if(!isset($data['hierarchical'])){		$data['hierarchical'] = true;}
-
-		$arr_data = array();
-
-		$arr_categories = get_categories(array(
-			'hierarchical' => $data['hierarchical'],
-			'hide_empty' => 1,
-		));
-
-		foreach($arr_categories as $category)
-		{
-			$arr_data[$category->cat_ID] = ($data['hierarchical'] && $category->parent > 0 ? "&nbsp;&nbsp;&nbsp;" : "").$category->name;
-		}
-
-		return $arr_data;
-	}*/
-
 	function get_order_for_select()
 	{
 		return array(
