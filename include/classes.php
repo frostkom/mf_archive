@@ -4,12 +4,29 @@ class mf_archive
 {
 	function __construct()
 	{
-
+		$this->post_status = 'archive';
 	}
 
-	function widgets_init()
+	function is_excluded_post_type($post_type)
 	{
-		register_widget('widget_archive');
+		$excluded = (array) apply_filters('archive_excluded_post_types', array('attachment'));
+
+		return in_array($post_type, $excluded);
+	}
+
+	function init()
+	{
+		$args = array(
+			'label' => __("Archived", 'lang_archive'),
+			'public' => false,
+			'private' => true,
+			'exclude_from_search' => true,
+			'show_in_admin_all_list' => false,
+			'show_in_admin_status_list' => true,
+			'label_count' => _n_noop(__("Archived", 'lang_archive')." <span class='count'>(%s)</span>", __("Archived", 'lang_archive')." <span class='count'>(%s)</span>"),
+		);
+
+		register_post_status($this->post_status, $args);
 	}
 
 	function settings_archive()
@@ -37,6 +54,74 @@ class mf_archive
 		$option = get_option($setting_key);
 
 		echo show_textfield(array('name' => $setting_key, 'value' => $option, 'placeholder' => __("Choose year here", 'lang_archive')));
+	}
+
+	function admin_init()
+	{
+		global $post_type, $pagenow;
+
+		if($pagenow == 'edit.php' && $this->is_excluded_post_type($post_type) == false)
+		{
+			$plugin_include_url = plugin_dir_url(__FILE__);
+			$plugin_version = get_plugin_version(__FILE__);
+
+			mf_enqueue_script('script_archive', $plugin_include_url."script_wp.js", array('archive_text' => __("Do Archive", 'lang_archive')), $plugin_version);
+		}
+	}
+
+	function pre_get_posts($wp_query)
+	{
+		global $post_type, $pagenow;
+
+		if($pagenow == 'edit.php' && $this->is_excluded_post_type($post_type) == false)
+		{
+			if($wp_query->query_vars['post_status'] == '')
+			{
+				$wp_query->set('post_status', array('draft', 'private', 'publish'));
+			}
+		}
+	}
+
+	function wp_loaded()
+	{
+		global $wpdb;
+
+		if(isset($_REQUEST['btnPostArchive']) && IS_EDITOR)
+		{
+			$post_id = check_var('post_id');
+
+			if($post_id > 0)
+			{
+				$wpdb->query($wpdb->prepare("UPDATE ".$wpdb->posts." SET post_status = %s WHERE ID = '%d' AND post_status = 'publish'", $this->post_status, $post_id));
+
+				if($wpdb->rows_affected > 0)
+				{
+					$wpdb->query($wpdb->prepare("UPDATE ".$wpdb->posts." SET post_status = %s WHERE post_parent = '%d' AND post_status = 'publish'", $this->post_status, $post_id));
+
+					//mf_redirect(admin_url("edit.php?post_type=".get_post_type($post_id)."&s=".get_post_title($post_id)));
+				}
+
+				else
+				{
+					wp_die(__("I could not archive the post for you", 'lang_archive'));
+				}
+			}
+		}
+	}
+
+	function row_actions($actions, $post)
+	{
+		if(IS_EDITOR && $post->post_status == 'publish')
+		{
+			$actions['archive'] = "<a href='".admin_url("edit.php?post_type=".$post->post_type."&btnPostArchive&post_id=".$post->ID)."'>".__("Do Archive", 'lang_archive')."</a>";
+		}
+
+		return $actions;
+	}
+
+	function widgets_init()
+	{
+		register_widget('widget_archive');
 	}
 
 	/*function get_the_archive_title($title)

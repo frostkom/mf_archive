@@ -3,7 +3,7 @@
 Plugin Name: MF Archive
 Plugin URI: https://github.com/frostkom/mf_archive
 Description: 
-Version: 2.4.6
+Version: 2.5.0
 Licence: GPLv2 or later
 Author: Martin Fors
 Author URI: https://frostkom.se
@@ -18,9 +18,20 @@ include_once("include/classes.php");
 
 $obj_archive = new mf_archive();
 
+add_action('init', array($obj_archive, 'init'));
+
 if(is_admin())
 {
+	register_uninstall_hook(__FILE__, 'uninstall_archive');
+
 	add_action('admin_init', array($obj_archive, 'settings_archive'));
+	add_action('admin_init', array($obj_archive, 'admin_init'), 0);
+
+	add_action('pre_get_posts', array($obj_archive, 'pre_get_posts'));
+
+	add_action('wp_loaded', array($obj_archive, 'wp_loaded'));
+	add_filter('post_row_actions', array($obj_archive, 'row_actions'), 10, 2);
+	add_filter('page_row_actions', array($obj_archive, 'row_actions'), 10, 2);
 }
 
 else
@@ -35,3 +46,10 @@ else
 add_action('widgets_init', array($obj_archive, 'widgets_init'));
 
 load_plugin_textdomain('lang_archive', false, dirname(plugin_basename(__FILE__)).'/lang/');
+
+function uninstall_archive()
+{
+	global $wpdb;
+
+	$wpdb->query("UPDATE ".$wpdb->posts." SET post_status = 'draft' WHERE post_status = 'archive'");
+}
