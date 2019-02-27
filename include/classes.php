@@ -141,7 +141,7 @@ class mf_archive
 
 	function wp_head()
 	{
-		if(apply_filters('get_widget_search', 'post_type_archives') > 0)
+		if(!is_plugin_active("mf_widget_logic_select/index.php") || apply_filters('get_widget_search', 'post_type_archives') > 0)
 		{
 			$plugin_include_url = plugin_dir_url(__FILE__);
 			$plugin_version = get_plugin_version(__FILE__);
