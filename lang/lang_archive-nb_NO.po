@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-21 07:22+0100\n"
+"POT-Creation-Date: 2019-03-22 09:52+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Martin Fors\n"
 "Language-Team: \n"
@@ -15,9 +15,39 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ..\n"
 
+msgid "Archived"
+msgstr "Arkiverte"
+
+msgid "Replace text"
+msgstr "Erstatt tekst"
+
+msgid "Archive"
+msgstr "Arkiv"
+
+msgid "Choose year here"
+msgstr "Velg året her"
+
+msgid "I could not archive the post for you"
+msgstr "Jeg kan ikke arkivere innlegget for deg"
+
+msgid "Ascending"
+msgstr "Stigende"
+
+msgid "Descending"
+msgstr "Synkende"
+
 msgid "All"
 msgstr "Alle"
 
 msgid "Title"
 msgstr "Tittel"
+
+msgid "Post Type"
+msgstr "Skriv Innlegg"
+
+msgid "Categories"
+msgstr "Kategorier"
+
+msgid "Always Show Years"
+msgstr "Vis Alltid År"
 
