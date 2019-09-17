@@ -441,7 +441,7 @@ class widget_archive extends WP_Widget
 
 			echo "<div class='flex_flow'>"
 				.show_select(array('data' => get_yes_no_for_select(), 'name' => $this->get_field_name('always_show_years'), 'text' => __("Always Show Years", 'lang_archive'), 'value' => $instance['always_show_years']))
-				.show_select(array('data' => get_yes_no_for_select(), 'name' => $this->get_field_name('show_all'), 'text' => __("Show 'All'", 'lang_archive'), 'value' => $instance['show_all']))
+				.show_select(array('data' => get_yes_no_for_select(), 'name' => $this->get_field_name('show_all'), 'text' => __("Show All", 'lang_archive'), 'value' => $instance['show_all']))
 				.show_select(array('data' => $this->get_order_for_select(), 'name' => $this->get_field_name('year_order'), 'text' => __("Year Order", 'lang_archive'), 'value' => $instance['year_order']))
 			."</div>
 		</div>";
