@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-22 09:52+0100\n"
+"POT-Creation-Date: 2019-10-10 08:45+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Martin Fors\n"
 "Language-Team: \n"
@@ -30,6 +30,9 @@ msgstr "Velg året her"
 msgid "I could not archive the post for you"
 msgstr "Jeg kan ikke arkivere innlegget for deg"
 
+msgid "Show archive for a chosen post type and/or category"
+msgstr "Vis arkiv for en valgt innlegget skriv og/eller kategori"
+
 msgid "Ascending"
 msgstr "Stigende"
 
@@ -41,6 +44,9 @@ msgstr "Alle"
 
 msgid "Title"
 msgstr "Tittel"
+
+msgid "Replace Page Title"
+msgstr "Bytt Side Tittel"
 
 msgid "Post Type"
 msgstr "Skriv Innlegg"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-15 06:46+0100\n"
+"POT-Creation-Date: 2019-09-20 10:40+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Martin Fors\n"
 "Language-Team: \n"
@@ -15,79 +15,57 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../include/classes.php:20
-#: ../include/classes.php:26
 msgid "Archived"
 msgstr "Arkiverade"
 
-#: ../include/classes.php:39
 msgid "Replace text"
 msgstr "Ersätt text"
 
-#: ../include/classes.php:48
 msgid "Archive"
 msgstr "Arkiv"
 
-#: ../include/classes.php:56
-#: ../include/classes.php:238
 msgid "Choose year here"
 msgstr "Välj år här"
 
-#: ../include/classes.php:68
-#: ../include/classes.php:116
 msgid "Do Archive"
 msgstr "Arkivera"
 
-#: ../include/classes.php:104
 msgid "I could not archive the post for you"
 msgstr "Jag kunde inte arkivera sidan åt dig"
 
-#: ../include/classes.php:159
 msgid "Show archive for a chosen post type and/or category"
 msgstr "Visa arkiv för vald posttyp och/eller kategori"
 
-#: ../include/classes.php:172
 msgid "Post Type Archive"
 msgstr "Arkiv för posttyper"
 
-#: ../include/classes.php:254
 msgid "Ascending"
 msgstr "Stigande"
 
-#: ../include/classes.php:255
 msgid "Descending"
 msgstr "Fallande"
 
-#: ../include/classes.php:363
-#: ../include/classes.php:388
 msgid "All"
 msgstr "Alla"
 
-#: ../include/classes.php:431
 msgid "Title"
 msgstr "Rubrik"
 
-#: ../include/classes.php:432
 msgid "Replace Page Title"
 msgstr "Ersätt titel på sida"
 
-#: ../include/classes.php:433
 msgid "Post Type"
 msgstr "Posttyp"
 
-#: ../include/classes.php:437
 msgid "Categories"
 msgstr "Kategorier"
 
-#: ../include/classes.php:441
 msgid "Always Show Years"
 msgstr "Visa alltid år"
 
-#: ../include/classes.php:442
-msgid "Show 'All'"
-msgstr "Visa 'Alla'"
+msgid "Show All"
+msgstr "Visa alla"
 
-#: ../include/classes.php:443
 msgid "Year Order"
 msgstr "Ordning på årtal"
 
