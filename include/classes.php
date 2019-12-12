@@ -326,7 +326,7 @@ class widget_archive extends WP_Widget
 						if($instance['always_show_years'] == 'yes' || count($arr_data_years) > 2)
 						{
 							echo "<form action='".get_site_url()."' method='get' class='mf_form'>"
-								.show_select(array('data' => $arr_data_years, 'name' => 'year', 'value' => $this->year, 'xtra' => " rel='submit_change' disabled"))
+								.show_select(array('data' => $arr_data_years, 'name' => 'year', 'value' => $this->year, 'xtra' => " rel='submit_change' class='is_disabled' disabled"))
 								.input_hidden(array('name' => 'cat', 'value' => $this->cat))
 							."</form>";
 						}
