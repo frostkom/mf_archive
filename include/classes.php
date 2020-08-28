@@ -156,7 +156,7 @@ class widget_archive extends WP_Widget
 {
 	public function __construct()
 	{
-		$widget_ops = array(
+		$this->widget_ops = array(
 			'classname' => 'widget_post_type_archive',
 			'description' => __("Show archive for a chosen post type and/or category", 'lang_archive'),
 		);
@@ -171,7 +171,7 @@ class widget_archive extends WP_Widget
 			'year_order' => 'DESC',
 		);
 
-		parent::__construct('post_type_archives', __("Post Type Archive", 'lang_archive'), $widget_ops);
+		parent::__construct('post_type_archives', __("Post Type Archive", 'lang_archive'), $this->widget_ops);
 	}
 
 	function fetch_request()
@@ -430,7 +430,7 @@ class widget_archive extends WP_Widget
 		}
 
 		echo "<div class='mf_form'>"
-			.show_textfield(array('name' => $this->get_field_name('title'), 'text' => __("Title", 'lang_archive'), 'value' => $instance['title'], 'xtra' => " id='archive-title'"))
+			.show_textfield(array('name' => $this->get_field_name('title'), 'text' => __("Title", 'lang_archive'), 'value' => $instance['title'], 'xtra' => " id='".$this->widget_ops['classname']."-title'"))
 			.show_textfield(array('name' => $this->get_field_name('replace_page_title'), 'text' => __("Replace Page Title", 'lang_archive'), 'value' => $instance['replace_page_title'], 'placeholder' => "[category] [year]"))
 			.show_select(array('data' => $arr_data_post_types, 'name' => $this->get_field_name('post_type'), 'text' => __("Post Type", 'lang_archive'), 'value' => $instance['post_type']));
 
