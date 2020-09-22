@@ -60,6 +60,11 @@ class mf_archive
 	{
 		global $post_type, $pagenow;
 
+		if(!is_plugin_active("mf_base/index.php"))
+		{
+			deactivate_plugins(str_replace("include/classes.php", "index.php", plugin_basename(__FILE__)));
+		}
+
 		if($pagenow == 'edit.php' && $this->is_excluded_post_type($post_type) == false)
 		{
 			$plugin_include_url = plugin_dir_url(__FILE__);
