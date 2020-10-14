@@ -214,27 +214,44 @@ class widget_archive extends WP_Widget
 		}
 
 		$this->display = false;
+		//$log_message = "";
 
-		if(strpos(get_page_template(), 'template_posts.php') !== false)
-		{
-			$this->display = true;
-		}
-
-		else if(isset($post->post_type) && $post->post_type == $this->instance['post_type'])
-		{
-			$this->display = true;
-		}
-
-		else if(count($this->instance['categories']) > 0)
+		if(count($this->instance['categories']) > 0)
 		{
 			foreach($this->arr_cat as $category)
 			{
 				if(in_array($category, $this->instance['categories']))
 				{
+					//$log_message .= "Category (".$category." IN ".var_export($this->instance['categories'], true).")";
+
 					$this->display = true;
 				}
 			}
 		}
+
+		else if(strpos(get_page_template(), 'template_posts.php') !== false)
+		{
+			//$log_message .= "Template Posts (".get_page_template().")";
+
+			$this->display = true;
+		}
+
+		else if(isset($post->post_type) && $post->post_type == $this->instance['post_type'])
+		{
+			//$log_message .= "Post Type (".$post->post_type.")";
+
+			$this->display = true;
+		}
+
+		/*if($log_message != '' && $_SERVER['REMOTE_ADDR'] == "2.71.234.11")
+		{
+			$post_id = $post->ID;
+
+			if($post_id > 0)
+			{
+				do_log("widget_archive()->fetch_request(): ".$post_id." (".$log_message.")");
+			}
+		}*/
 	}
 
 	function get_post_years()
