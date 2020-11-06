@@ -243,7 +243,7 @@ class widget_archive extends WP_Widget
 			$this->display = true;
 		}
 
-		/*if($log_message != '' && $_SERVER['REMOTE_ADDR'] == "2.71.234.11")
+		/*if($log_message != '' && $_SERVER['REMOTE_ADDR'] == "")
 		{
 			$post_id = $post->ID;
 
