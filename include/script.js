@@ -1,6 +1,6 @@
 jQuery(function($)
 {
-	var dom_obj = $('#replace_page_title');
+	var dom_obj = $("#replace_page_title");
 
 	if(dom_obj.length > 0)
 	{
@@ -10,7 +10,7 @@ jQuery(function($)
 		{
 			var i = 0;
 
-			$('body.archive h1').each(function()
+			$("body.archive h1").each(function()
 			{
 				if(i == 0)
 				{
