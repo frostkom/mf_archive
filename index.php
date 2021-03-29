@@ -3,7 +3,7 @@
 Plugin Name: MF Archive
 Plugin URI: https://github.com/frostkom/mf_archive
 Description: 
-Version: 2.5.11
+Version: 2.5.12
 Licence: GPLv2 or later
 Author: Martin Fors
 Author URI: https://frostkom.se
@@ -14,42 +14,45 @@ Depends: MF Base
 GitHub Plugin URI: frostkom/mf_archive
 */
 
-include_once("include/classes.php");
-
-$obj_archive = new mf_archive();
-
-add_action('init', array($obj_archive, 'init'));
-
-if(is_admin())
+if(is_plugin_active("mf_base/index.php"))
 {
-	register_uninstall_hook(__FILE__, 'uninstall_archive');
+	include_once("include/classes.php");
 
-	add_action('admin_init', array($obj_archive, 'settings_archive'));
-	add_action('admin_init', array($obj_archive, 'admin_init'), 0);
+	$obj_archive = new mf_archive();
 
-	add_action('pre_get_posts', array($obj_archive, 'pre_get_posts'));
+	add_action('init', array($obj_archive, 'init'));
 
-	add_action('wp_loaded', array($obj_archive, 'wp_loaded'));
-	add_filter('post_row_actions', array($obj_archive, 'row_actions'), 10, 2);
-	add_filter('page_row_actions', array($obj_archive, 'row_actions'), 10, 2);
-}
+	if(is_admin())
+	{
+		register_uninstall_hook(__FILE__, 'uninstall_archive');
 
-else
-{
-	add_action('wp_head', array($obj_archive, 'wp_head'), 0);
+		add_action('admin_init', array($obj_archive, 'settings_archive'));
+		add_action('admin_init', array($obj_archive, 'admin_init'), 0);
 
-	//add_filter('get_the_archive_title', array($obj_archive, 'get_the_archive_title'));
-	//add_filter('wp_list_pages_excludes', '');
-	//add_filter('wp_list_pages', '');
-}
+		add_action('pre_get_posts', array($obj_archive, 'pre_get_posts'));
 
-add_action('widgets_init', array($obj_archive, 'widgets_init'));
+		add_action('wp_loaded', array($obj_archive, 'wp_loaded'));
+		add_filter('post_row_actions', array($obj_archive, 'row_actions'), 10, 2);
+		add_filter('page_row_actions', array($obj_archive, 'row_actions'), 10, 2);
+	}
 
-load_plugin_textdomain('lang_archive', false, dirname(plugin_basename(__FILE__))."/lang/");
+	else
+	{
+		add_action('wp_head', array($obj_archive, 'wp_head'), 0);
 
-function uninstall_archive()
-{
-	global $wpdb;
+		//add_filter('get_the_archive_title', array($obj_archive, 'get_the_archive_title'));
+		//add_filter('wp_list_pages_excludes', '');
+		//add_filter('wp_list_pages', '');
+	}
 
-	$wpdb->query("UPDATE ".$wpdb->posts." SET post_status = 'draft' WHERE post_status = 'archive'");
+	add_action('widgets_init', array($obj_archive, 'widgets_init'));
+
+	load_plugin_textdomain('lang_archive', false, dirname(plugin_basename(__FILE__))."/lang/");
+
+	function uninstall_archive()
+	{
+		global $wpdb;
+
+		$wpdb->query("UPDATE ".$wpdb->posts." SET post_status = 'draft' WHERE post_status = 'archive'");
+	}
 }
