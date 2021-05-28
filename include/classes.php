@@ -53,7 +53,7 @@ class mf_archive
 		$setting_key = get_setting_key(__FUNCTION__);
 		$option = get_option($setting_key);
 
-		echo show_textfield(array('name' => $setting_key, 'value' => $option, 'placeholder' => __("Choose year here", 'lang_archive')));
+		echo show_textfield(array('name' => $setting_key, 'value' => $option, 'placeholder' => __("Choose Year Here", 'lang_archive')));
 	}
 
 	function admin_init()
