@@ -238,7 +238,7 @@ class widget_archive extends WP_Widget
 			$this->display = true;
 		}
 
-		/*if($log_message != '' && $_SERVER['REMOTE_ADDR'] == "")
+		/*if($log_message != '')
 		{
 			$post_id = $post->ID;
 
