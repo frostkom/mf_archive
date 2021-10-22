@@ -92,11 +92,11 @@ class mf_archive
 
 			if($post_id > 0)
 			{
-				$wpdb->query($wpdb->prepare("UPDATE ".$wpdb->posts." SET post_status = %s WHERE ID = '%d' AND post_status = 'publish'", $this->post_status, $post_id));
+				$wpdb->query($wpdb->prepare("UPDATE ".$wpdb->posts." SET post_status = %s WHERE ID = '%d' AND post_status = %s", $this->post_status, $post_id, 'publish'));
 
 				if($wpdb->rows_affected > 0)
 				{
-					$wpdb->query($wpdb->prepare("UPDATE ".$wpdb->posts." SET post_status = %s WHERE post_parent = '%d' AND post_status = 'publish'", $this->post_status, $post_id));
+					$wpdb->query($wpdb->prepare("UPDATE ".$wpdb->posts." SET post_status = %s WHERE post_parent = '%d' AND post_status = %s", $this->post_status, $post_id, 'publish'));
 
 					//mf_redirect(admin_url("edit.php?post_type=".get_post_type($post_id)."&s=".get_post_title($post_id)));
 				}
@@ -257,7 +257,7 @@ class widget_archive extends WP_Widget
 			'' => "-- ".get_option_or_default('setting_archive_choose_here_text', __("Choose year here", 'lang_archive'))." --"
 		);
 
-		$result = $wpdb->get_results($wpdb->prepare("SELECT SUBSTRING(post_date, 1, 4) AS post_year FROM ".$wpdb->posts." INNER JOIN ".$wpdb->term_relationships." ON ".$wpdb->posts.".ID = ".$wpdb->term_relationships.".object_id INNER JOIN ".$wpdb->term_taxonomy ." USING (term_taxonomy_id) WHERE post_type = %s AND post_status = 'publish'".$this->query_where." GROUP BY post_year ORDER BY post_year ".$this->instance['year_order'], $this->instance['post_type'])); //, COUNT(ID) AS year_amount
+		$result = $wpdb->get_results($wpdb->prepare("SELECT SUBSTRING(post_date, 1, 4) AS post_year FROM ".$wpdb->posts." INNER JOIN ".$wpdb->term_relationships." ON ".$wpdb->posts.".ID = ".$wpdb->term_relationships.".object_id INNER JOIN ".$wpdb->term_taxonomy ." USING (term_taxonomy_id) WHERE post_type = %s AND post_status = %s".$this->query_where." GROUP BY post_year ORDER BY post_year ".$this->instance['year_order'], $this->instance['post_type'], 'publish'));
 
 		foreach($result as $r)
 		{
@@ -287,7 +287,7 @@ class widget_archive extends WP_Widget
 		{
 			if(!($category->parent > 0))
 			{
-				$result = $wpdb->get_results($wpdb->prepare("SELECT ID FROM ".$wpdb->posts." INNER JOIN ".$wpdb->term_relationships." ON ".$wpdb->posts.".ID = ".$wpdb->term_relationships.".object_id INNER JOIN ".$wpdb->term_taxonomy ." USING (term_taxonomy_id) WHERE post_type = %s AND post_status = 'publish' AND post_date LIKE %s AND term_id = '%d'".$this->query_where, $this->instance['post_type'], $this->year."%", $category->cat_ID));
+				$result = $wpdb->get_results($wpdb->prepare("SELECT ID FROM ".$wpdb->posts." INNER JOIN ".$wpdb->term_relationships." ON ".$wpdb->posts.".ID = ".$wpdb->term_relationships.".object_id INNER JOIN ".$wpdb->term_taxonomy ." USING (term_taxonomy_id) WHERE post_type = %s AND post_status = %s AND post_date LIKE %s AND term_id = '%d'".$this->query_where, $this->instance['post_type'], 'publish', $this->year."%", $category->cat_ID));
 
 				$count_temp = $wpdb->num_rows;
 
@@ -302,7 +302,7 @@ class widget_archive extends WP_Widget
 		{
 			if($category->parent > 0)
 			{
-				$result = $wpdb->get_results($wpdb->prepare("SELECT ID FROM ".$wpdb->posts." INNER JOIN ".$wpdb->term_relationships." ON ".$wpdb->posts.".ID = ".$wpdb->term_relationships.".object_id INNER JOIN ".$wpdb->term_taxonomy." USING (term_taxonomy_id) WHERE post_type = %s AND post_status = 'publish' AND post_date LIKE %s AND term_id = '%d'".$this->query_where, $this->instance['post_type'], $this->year."%", $category->cat_ID));
+				$result = $wpdb->get_results($wpdb->prepare("SELECT ID FROM ".$wpdb->posts." INNER JOIN ".$wpdb->term_relationships." ON ".$wpdb->posts.".ID = ".$wpdb->term_relationships.".object_id INNER JOIN ".$wpdb->term_taxonomy." USING (term_taxonomy_id) WHERE post_type = %s AND post_status = %s AND post_date LIKE %s AND term_id = '%d'".$this->query_where, $this->instance['post_type'], 'publish', $this->year."%", $category->cat_ID));
 
 				$count_temp = $wpdb->num_rows;
 
