@@ -2,10 +2,9 @@
 
 class mf_archive
 {
-	function __construct()
-	{
-		$this->post_status = 'archive';
-	}
+	var $post_status = 'archive';
+
+	function __construct(){}
 
 	function is_excluded_post_type($post_type)
 	{
