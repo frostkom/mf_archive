@@ -153,8 +153,7 @@ class mf_archive
 
 class widget_archive extends WP_Widget
 {
-	var $widget_ops = array();
-
+	var $widget_ops;
 	var $arr_default = array(
 		'title' => '',
 		'replace_page_title' => '',
@@ -171,16 +170,6 @@ class widget_archive extends WP_Widget
 			'classname' => 'widget_post_type_archive',
 			'description' => __("Show archive for a chosen post type and/or category", 'lang_archive'),
 		);
-
-		/*$this->arr_default = array(
-			'title' => '',
-			'replace_page_title' => '',
-			'post_type' => 'post',
-			'categories' => array(),
-			'always_show_years' => 'no',
-			'show_all' => 'no',
-			'year_order' => 'DESC',
-		);*/
 
 		parent::__construct('post_type_archives', __("Post Type Archive", 'lang_archive'), $this->widget_ops);
 	}
