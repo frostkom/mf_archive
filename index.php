@@ -3,7 +3,7 @@
 Plugin Name: MF Archive
 Plugin URI: https://github.com/frostkom/mf_archive
 Description:
-Version: 2.5.22
+Version: 2.5.23
 Licence: GPLv2 or later
 Author: Martin Fors
 Author URI: https://martinfors.se
@@ -45,7 +45,10 @@ if(!function_exists('is_plugin_active') || function_exists('is_plugin_active') &
 		//add_filter('wp_list_pages', '');
 	}
 
-	add_action('widgets_init', array($obj_archive, 'widgets_init'));
+	if(wp_is_block_theme() == false)
+	{
+		add_action('widgets_init', array($obj_archive, 'widgets_init'));
+	}
 
 	load_plugin_textdomain('lang_archive', false, dirname(plugin_basename(__FILE__))."/lang/");
 
