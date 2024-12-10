@@ -15,6 +15,8 @@ class mf_archive
 
 	function init()
 	{
+		load_plugin_textdomain('lang_archive', false, str_replace("/include", "", dirname(plugin_basename(__FILE__)))."/lang/");
+
 		$args = array(
 			'label' => __("Archived", 'lang_archive'),
 			'public' => false,
