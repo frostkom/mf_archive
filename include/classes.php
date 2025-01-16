@@ -59,9 +59,9 @@ class mf_archive
 
 	function admin_init()
 	{
-		global $post_type, $pagenow;
+		global $pagenow;
 
-		if($pagenow == 'edit.php' && $this->is_excluded_post_type($post_type) == false)
+		if($pagenow == 'edit.php' && $this->is_excluded_post_type(check_var('post_type')) == false)
 		{
 			$plugin_include_url = plugin_dir_url(__FILE__);
 			$plugin_version = get_plugin_version(__FILE__);
