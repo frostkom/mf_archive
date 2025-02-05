@@ -64,9 +64,8 @@ class mf_archive
 		if($pagenow == 'edit.php' && $this->is_excluded_post_type(check_var('post_type')) == false)
 		{
 			$plugin_include_url = plugin_dir_url(__FILE__);
-			$plugin_version = get_plugin_version(__FILE__);
 
-			mf_enqueue_script('script_archive', $plugin_include_url."script_wp.js", array('archive_text' => __("Do Archive", 'lang_archive')), $plugin_version);
+			mf_enqueue_script('script_archive', $plugin_include_url."script_wp.js", array('archive_text' => __("Do Archive", 'lang_archive')));
 		}
 	}
 
@@ -145,10 +144,9 @@ class mf_archive
 		if(!is_plugin_active("mf_widget_logic_select/index.php") || apply_filters('get_widget_search', 'post_type_archives') > 0)
 		{
 			$plugin_include_url = plugin_dir_url(__FILE__);
-			$plugin_version = get_plugin_version(__FILE__);
 
-			mf_enqueue_style('style_archive', $plugin_include_url."style.css", $plugin_version);
-			mf_enqueue_script('script_archive', $plugin_include_url."script.js", $plugin_version);
+			mf_enqueue_style('style_archive', $plugin_include_url."style.css");
+			mf_enqueue_script('script_archive', $plugin_include_url."script.js");
 		}
 	}
 }
