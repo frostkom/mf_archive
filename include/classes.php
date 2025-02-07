@@ -98,7 +98,7 @@ class mf_archive
 				{
 					$wpdb->query($wpdb->prepare("UPDATE ".$wpdb->posts." SET post_status = %s WHERE post_parent = '%d' AND post_status = %s", $this->post_status, $post_id, 'publish'));
 
-					//mf_redirect(admin_url("edit.php?post_type=".get_post_type($post_id)."&s=".get_post_title($post_id)));
+					//mf_redirect(admin_url("edit.php?post_type=".get_post_type($post_id)."&s=".get_the_title($post_id)));
 				}
 
 				else
